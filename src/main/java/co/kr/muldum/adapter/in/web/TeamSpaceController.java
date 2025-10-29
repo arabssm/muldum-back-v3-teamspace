@@ -38,17 +38,42 @@ public class TeamSpaceController {
             @ApiResponse(
                     responseCode = "200",
                     description = "팀 목록 조회 성공",
-                    content = @Content(schema = @Schema(implementation = TeamSpaceResponse.class))
+                    content = @Content(
+                            schema = @Schema(implementation = TeamSpaceResponse.class),
+                            mediaType = "application/json"
+                    )
             ),
             @ApiResponse(
                     responseCode = "404",
                     description = "팀을 찾을 수 없음",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponse.class),
+                            mediaType = "application/json",
+                            examples = @io.swagger.v3.oas.annotations.media.ExampleObject(
+                                    value = """
+                                            {
+                                              "errorCode": "TEAM_NOT_FOUND",
+                                              "message": "팀 정보를 찾을 수 없습니다."
+                                            }
+                                            """
+                            )
+                    )
             ),
             @ApiResponse(
                     responseCode = "500",
                     description = "서버 내부 오류 (팀스페이스 데이터 로드 실패)",
-                    content = @Content(schema = @Schema(implementation = ErrorResponse.class))
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponse.class),
+                            mediaType = "application/json",
+                            examples = @io.swagger.v3.oas.annotations.media.ExampleObject(
+                                    value = """
+                                            {
+                                              "errorCode": "TEAMSPACE_LOAD_FAILED",
+                                              "message": "팀스페이스 데이터를 불러오는 중 오류가 발생했습니다: 데이터 조회 실패"
+                                            }
+                                            """
+                            )
+                    )
             )
     })
     @GetMapping("/teamspace")
