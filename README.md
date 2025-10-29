@@ -14,7 +14,7 @@ CONVENTION.md 파일을 꼭 읽어주세요.
 
 이 레포지토리는 muldum-back-v3 멀티 레포를 위한 템플릿 레포지토리입니다.
 
-# 물듬(stock)
+# 물듬(teamspace)
 
 이 부분에는 이 레포지토리가 어떤 기능을 위한 멀티레포인지 ()안에 기입합니다
 (예: stock, notice 등)
