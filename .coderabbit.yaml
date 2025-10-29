@@ -1,15 +1,27 @@
 # .coderabbit.yaml
 language: "ko-KR"
 early_access: false
+
 reviews:
+  # 대체로 무난한 톤
   profile: "chill"
+  # 차단(PR 변경요청)까지는 잘 안 하도록
   request_changes_workflow: false
+  # PR 전체를 한 눈에 보게
   high_level_summary: true
-  poem: true 
+  # 재미 옵션은 끄는 걸 권장(원하면 true)
+  poem: false
+  # 진행 상태(리뷰 완료/대기 등) 표시
   review_status: true
+  # 긴 워크스루는 접지 않음(원하면 true로)
   collapse_walkthrough: false
-  auto_review:
-    enabled: true
-    drafts: false
+
+auto_review:
+  # PR 생성/업데이트 시 자동 리뷰
+  enabled: true
+  # 초기 셋업 확인 편의를 위해 Draft도 허용
+  drafts: true
+
 chat:
+  # 코멘트에 질문 달리면 자동 응답
   auto_reply: true
