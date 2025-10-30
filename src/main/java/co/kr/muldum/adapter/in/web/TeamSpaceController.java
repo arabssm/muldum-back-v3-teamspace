@@ -32,31 +32,15 @@ public class TeamSpaceController {
 
     @Operation(
             summary = "팀스페이스 목록 조회",
-            description = "팀스페이스 페이지에 표시되는 모든 팀의 목록을 조회합니다. 각 팀의 정보와 팀원 목록을 포함합니다."
+            description = "팀스페이스 페이지에 표시되는 모든 팀의 목록을 조회합니다. 각 팀의 정보와 팀원 목록을 포함합니다. 팀이 없는 경우 빈 배열을 반환합니다."
     )
     @ApiResponses({
             @ApiResponse(
                     responseCode = "200",
-                    description = "팀 목록 조회 성공",
+                    description = "팀 목록 조회 성공 (팀이 없는 경우 빈 배열 반환)",
                     content = @Content(
                             schema = @Schema(implementation = TeamSpaceResponse.class),
                             mediaType = "application/json"
-                    )
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "팀을 찾을 수 없음",
-                    content = @Content(
-                            schema = @Schema(implementation = ErrorResponse.class),
-                            mediaType = "application/json",
-                            examples = @io.swagger.v3.oas.annotations.media.ExampleObject(
-                                    value = """
-                                            {
-                                              "errorCode": "TEAM_NOT_FOUND",
-                                              "message": "팀 정보를 찾을 수 없습니다."
-                                            }
-                                            """
-                            )
                     )
             ),
             @ApiResponse(

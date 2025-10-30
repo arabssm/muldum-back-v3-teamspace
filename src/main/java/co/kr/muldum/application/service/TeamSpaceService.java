@@ -4,7 +4,6 @@ import co.kr.muldum.application.port.in.GetTeamSpaceUseCase;
 import co.kr.muldum.application.port.in.response.TeamSpaceListResponse;
 import co.kr.muldum.application.port.in.response.TeamSpaceListResponse.MemberInfo;
 import co.kr.muldum.application.port.in.response.TeamSpaceListResponse.TeamInfo;
-import co.kr.muldum.domain.exception.TeamNotFoundException;
 import co.kr.muldum.domain.exception.TeamSpaceLoadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,17 +35,10 @@ public class TeamSpaceService implements GetTeamSpaceUseCase {
             TeamInfo team = TeamInfo.of(1L, "아라", members);
             List<TeamInfo> teams = List.of(team);
 
-            // 팀 목록이 비어있는 경우 예외 발생
-            if (teams.isEmpty()) {
-                throw new TeamNotFoundException();
-            }
-
+            // 팀 목록이 비어있어도 빈 배열을 반환 (RESTful 설계)
             log.info("Successfully loaded {} team(s) from teamspace", teams.size());
             return TeamSpaceListResponse.of(teams);
 
-        } catch (TeamNotFoundException e) {
-            log.warn("No teams found in teamspace");
-            throw e;
         } catch (Exception e) {
             log.error("Failed to load teamspace data", e);
             throw new TeamSpaceLoadException("데이터 조회 실패", e);
