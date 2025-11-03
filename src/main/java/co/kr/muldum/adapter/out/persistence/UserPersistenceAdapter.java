@@ -20,4 +20,10 @@ public class UserPersistenceAdapter implements LoadUserPort {
         return userJpaRepository.findByEmail(email)
                 .map(UserMapper::toDomain);
     }
+
+    @Override
+    public Optional<User> findByGradeAndClassAndStudentNo(int grade, int classNo, int studentNo) {
+        return userJpaRepository.findByGradeAndClassNoAndStudentNo(grade, classNo, studentNo)
+                .map(UserMapper::toDomain);
+    }
 }
