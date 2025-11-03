@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface LoadUserPort {
     Optional<User> findByEmail(String email);
+    Optional<User> findByGradeAndClassAndStudentNo(int grade, int classNo, int studentNo);
 }
