@@ -31,7 +31,8 @@ public class TeamInviteController {
 
     @Operation(
             summary = "Google Sheet를 활용한 팀 초대",
-            description = "Google Sheet 링크와 팀 타입을 입력 받아 팀원 명단을 검증합니다. 시트에는 팀명, 학번(studentId), 이름, 역할(LEADER 또는 공백)을 포함해야 하며, 역할이 비어 있으면 자동으로 MEMBER로 처리됩니다."
+            description = "Google Sheet 링크와 팀 타입을 입력 받아 팀원 명단을 검증합니다. 시트에는 팀명, 학번(studentId), 이름, 역할(LEADER 또는 공백)을 포함해야 하며, 역할이 비어 있으면 자동으로 MEMBER로 처리됩니다.\n\n"
+                    + "Swagger에서 테스트할 경우 `googleSheetUrl`에 `mock://team_invite_sample` 값을 사용하면 예시 CSV가 적용되어 동작을 확인할 수 있습니다."
     )
     @ApiResponses({
             @ApiResponse(
