@@ -8,10 +8,10 @@ public class InvalidParameterException extends BusinessException {
     private static final HttpStatus HTTP_STATUS = HttpStatus.BAD_REQUEST;
 
     public InvalidParameterException(String message) {
-        super(message, HTTP_STATUS, ERROR_CODE);
+        super("잘못된 요청입니다. " + message, HTTP_STATUS, ERROR_CODE);
     }
 
     public InvalidParameterException(String parameterName, String value) {
-        super("유효하지 않은 " + parameterName + " 값입니다: " + value, HTTP_STATUS, ERROR_CODE);
+        super("잘못된 요청입니다. 유효하지 않은 " + parameterName + " 값입니다: " + value, HTTP_STATUS, ERROR_CODE);
     }
 }
