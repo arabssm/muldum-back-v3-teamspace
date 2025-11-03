@@ -12,15 +12,39 @@ public class StudentJpaEntity extends UserJpaEntity {
     @Column(name = "team_id")
     private Long teamId;
 
+    @Column(name = "grade")
+    private int grade;
+
+    @Column(name = "class_no")
+    private int classNo;
+
+    @Column(name = "student_no")
+    private int studentNo;
+
     protected StudentJpaEntity() {
     }
 
-    public StudentJpaEntity(Long userId, String email, String name, Long teamId) {
+    public StudentJpaEntity(Long userId, String email, String name, Long teamId, int grade, int classNo, int studentNo) {
         super(userId, email, name, Role.STUDENT);
         this.teamId = teamId;
+        this.grade = grade;
+        this.classNo = classNo;
+        this.studentNo = studentNo;
     }
 
     public Long getTeamId() {
         return teamId;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public int getClassNo() {
+        return classNo;
+    }
+
+    public int getStudentNo() {
+        return studentNo;
     }
 }
