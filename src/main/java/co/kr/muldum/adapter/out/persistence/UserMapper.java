@@ -15,7 +15,10 @@ public class UserMapper {
                     studentEntity.getUserId(),
                     studentEntity.getEmail(),
                     studentEntity.getName(),
-                    studentEntity.getTeamId()
+                    studentEntity.getTeamId(),
+                    studentEntity.getGrade(),
+                    studentEntity.getClassNo(),
+                    studentEntity.getStudentNo()
             );
         } else if (entity instanceof TeacherJpaEntity teacherEntity) {
             return Teacher.of(
@@ -34,7 +37,10 @@ public class UserMapper {
                     student.getUserId(),
                     student.getEmail(),
                     student.getName(),
-                    student.getTeamId()
+                    student.getTeamId(),
+                    student.getGrade(),
+                    student.getClassNo(),
+                    student.getStudentNo()
             );
         } else if (user instanceof Teacher teacher) {
             return new TeacherJpaEntity(
