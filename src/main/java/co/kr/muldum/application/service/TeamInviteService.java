@@ -3,6 +3,7 @@ package co.kr.muldum.application.service;
 import co.kr.muldum.application.port.in.InviteTeamUseCase;
 import co.kr.muldum.application.port.out.LoadUserPort;
 import co.kr.muldum.application.port.out.TeamManagementPort;
+import co.kr.muldum.application.port.out.TeamSheetFetchPort;
 import co.kr.muldum.domain.exception.InvalidParameterException;
 import co.kr.muldum.domain.exception.TeamInvitationException;
 import co.kr.muldum.domain.exception.UnregisteredUserException;
@@ -14,11 +15,8 @@ import co.kr.muldum.domain.model.Team;
 import co.kr.muldum.domain.model.TeamType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -39,13 +37,16 @@ public class TeamInviteService implements InviteTeamUseCase {
 
     private final LoadUserPort loadUserPort;
     private final TeamManagementPort teamManagementPort;
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final TeamSheetFetchPort teamSheetFetchPort;
 
     private static final Pattern STUDENT_IDENTIFIER_PATTERN = Pattern.compile("(\\d+)학년\\s*(\\d+)반\\s*(\\d+)번");
 
-    public TeamInviteService(LoadUserPort loadUserPort, TeamManagementPort teamManagementPort) {
+    public TeamInviteService(LoadUserPort loadUserPort,
+                             TeamManagementPort teamManagementPort,
+                             TeamSheetFetchPort teamSheetFetchPort) {
         this.loadUserPort = loadUserPort;
         this.teamManagementPort = teamManagementPort;
+        this.teamSheetFetchPort = teamSheetFetchPort;
     }
 
     @Override
@@ -56,8 +57,11 @@ public class TeamInviteService implements InviteTeamUseCase {
 
         TeamType type = validateTeamType(teamType);
 
-        String exportUrl = toCsvExportUrl(googleSheetUrl.trim());
-        String csvContent = fetchSheet(exportUrl);
+        String trimmedUrl = googleSheetUrl.trim();
+        boolean isMockRequest = trimmedUrl.startsWith("mock://");
+
+        String sheetSource = isMockRequest ? trimmedUrl : toCsvExportUrl(trimmedUrl);
+        String csvContent = teamSheetFetchPort.fetchSheet(sheetSource);
         List<TeamInviteRow> rows = parseCsv(csvContent, type);
 
         if (rows.isEmpty()) {
@@ -138,18 +142,6 @@ public class TeamInviteService implements InviteTeamUseCase {
         return Optional.empty();
     }
 
-    private String fetchSheet(String exportUrl) {
-        try {
-            ResponseEntity<String> response = restTemplate.getForEntity(exportUrl, String.class);
-            if (!response.getStatusCode().is2xxSuccessful() || response.getBody() == null) {
-                throw new TeamInvitationException("Google Sheet 데이터를 불러오지 못했습니다.");
-            }
-            return response.getBody();
-        } catch (RestClientException e) {
-            throw new TeamInvitationException("Google Sheet 데이터를 불러오는 중 오류가 발생했습니다.", e);
-        }
-    }
-
     private List<TeamInviteRow> parseCsv(String csvContent, TeamType teamType) {
         List<TeamInviteRow> rows = new ArrayList<>();
         String[] lines = csvContent.split("\\r?\\n");
@@ -211,7 +203,7 @@ public class TeamInviteService implements InviteTeamUseCase {
             Student student = loadUserPort.findByGradeAndClassAndStudentNo(row.grade(), row.classNo(), row.studentNo())
                     .filter(user -> user instanceof Student)
                     .map(user -> (Student) user)
-                    .orElseThrow(() -> new UnregisteredUserException("학번 " + row.studentId() + " (행 " + row.rowNumber() + ")"));
+                    .orElseThrow(() -> UnregisteredUserException.forStudent(row.grade(), row.classNo(), row.studentNo(), row.rowNumber()));
 
             if (student.getRole() != Role.STUDENT) {
                 throw new InvalidParameterException("학생만 초대할 수 있습니다.");
