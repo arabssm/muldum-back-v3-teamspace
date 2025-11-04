@@ -16,7 +16,8 @@ public final class TeamMapper {
                 entity.getTeamId(),
                 entity.getName(),
                 entity.getTeamType(),
-                entity.getReadme()
+                entity.getReadme(),
+                entity.getIconUrl()
         );
     }
 
@@ -25,7 +26,8 @@ public final class TeamMapper {
                 team.getTeamId(),
                 team.getName(),
                 team.getTeamType(),
-                team.getReadme()
+                team.getReadme(),
+                team.getIconUrl()
         );
     }
 

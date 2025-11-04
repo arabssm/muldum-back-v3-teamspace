@@ -22,14 +22,18 @@ public class TeamJpaEntity {
     @Column(columnDefinition = "text")
     private String readme;
 
+    @Column(name = "icon_url", length = 255)
+    private String iconUrl;
+
     protected TeamJpaEntity() {
     }
 
-    public TeamJpaEntity(Long teamId, String name, TeamType teamType, String readme) {
+    public TeamJpaEntity(Long teamId, String name, TeamType teamType, String readme, String iconUrl) {
         this.teamId = teamId;
         this.name = name;
         this.teamType = teamType;
         this.readme = readme;
+        this.iconUrl = iconUrl;
     }
 
     public Long getTeamId() {
@@ -48,11 +52,19 @@ public class TeamJpaEntity {
         return readme;
     }
 
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
     public void updateReadme(String readme) {
         this.readme = readme;
     }
 
     public void updateName(String name) {
         this.name = name;
+    }
+
+    public void updateIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 }
