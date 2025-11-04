@@ -14,4 +14,6 @@ public interface TeamManagementPort {
     Team saveTeam(Team team);
 
     void replaceMembers(Long teamId, List<Member> members);
+
+    void updateTeamIcon(Long teamId, TeamType expectedType, String iconUrl);
 }

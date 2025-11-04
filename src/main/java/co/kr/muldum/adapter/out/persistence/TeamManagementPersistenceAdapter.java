@@ -59,4 +59,16 @@ public class TeamManagementPersistenceAdapter implements TeamManagementPort {
             memberJpaRepository.save(memberEntity);
         }
     }
+
+    @Override
+    public void updateTeamIcon(Long teamId, TeamType expectedType, String iconUrl) {
+        TeamJpaEntity team = teamJpaRepository.findById(teamId)
+                .orElseThrow(() -> new TeamNotFoundException(teamId));
+
+        if (expectedType != null && team.getTeamType() != expectedType) {
+            throw new TeamNotFoundException(teamId);
+        }
+
+        team.updateIconUrl(iconUrl);
+    }
 }
