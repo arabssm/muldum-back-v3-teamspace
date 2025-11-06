@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Teacher Team", description = "교사용 팀 관리 API")
 @RestController
-@RequestMapping("/tch")
+@RequestMapping("/teamspace")
 public class TeamInviteController {
 
     private final InviteTeamUseCase inviteTeamUseCase;

@@ -20,7 +20,7 @@ import java.util.List;
 
 @Tag(name = "SuperAdmin", description = "슈퍼 관리자 API")
 @RestController
-@RequestMapping("/sup")
+@RequestMapping("/teamspace")
 public class SuperAdminController {
 
     private final GetTeamSpaceLogsUseCase getTeamSpaceLogsUseCase;
@@ -59,7 +59,7 @@ public class SuperAdminController {
                     )
             )
     })
-    @GetMapping("/teamspace/logs")
+    @GetMapping("/logs")
     public ResponseEntity<List<TeamSpaceLogResponse>> getTeamSpaceLogs(
             @Parameter(description = "로그 메소드 타입 (CREATE_TEAM, UPDATE_TEAM, DELETE_TEAM, INVITE_MEMBER, REMOVE_MEMBER, UPDATE_TEAM_PAGE, UPDATE_BANNER, UPDATE_ICON)", required = false)
             @RequestParam(required = false) String type

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "TeamPage", description = "팀 페이지 관련 API")
 @RestController
-@RequestMapping("/std")
 public class UpdateTeamPageController {
 
     private final UpdateTeamPageUseCase updateTeamPageUseCase;

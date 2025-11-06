@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/ara/auth")
+@RequestMapping("/auth")
 public class GoogleLoginController {
 
     private final GoogleLoginUseCase googleLoginUseCase;

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "TeamSpace Banner", description = "팀스페이스 배너 관련 API")
 @RestController
-@RequestMapping("/std")
+@RequestMapping("/teamspace")
 public class UpdateBannerController {
 
     private final UpdateBannerUseCase updateBannerUseCase;
@@ -136,7 +136,7 @@ public class UpdateBannerController {
                     )
             )
     })
-    @PatchMapping("/teamspace/banner")
+    @PatchMapping("/banner")
     public ResponseEntity<MessageResponse> updateBanner(
             @Parameter(description = "팀 ID", example = "1", required = true)
             @RequestParam Long teamid,

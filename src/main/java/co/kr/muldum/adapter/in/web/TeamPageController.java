@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "TeamPage", description = "팀 페이지 관련 API")
 @RestController
-@RequestMapping("/std")
+@RequestMapping("/teamspace")
 public class TeamPageController {
 
     private final GetTeamPageUseCase getTeamPageUseCase;
@@ -138,7 +138,7 @@ public class TeamPageController {
                     )
             )
     })
-    @GetMapping("/teamspace/{team-id}")
+    @GetMapping("/{team-id}")
     public ResponseEntity<TeamPageResponse> getTeamPage(
             @Parameter(description = "팀 ID", example = "1", required = true)
             @PathVariable("team-id") Long teamId) {

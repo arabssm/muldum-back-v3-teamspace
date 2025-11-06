@@ -21,7 +21,6 @@ import java.util.List;
 
 @Tag(name = "TeamSpace", description = "팀스페이스 관련 API")
 @RestController
-@RequestMapping("/ara")
 public class TeamSpaceController {
 
     private final GetTeamSpaceUseCase getTeamSpaceUseCase;

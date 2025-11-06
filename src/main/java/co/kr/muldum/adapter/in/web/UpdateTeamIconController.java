@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "TeamSpace Icon", description = "팀스페이스 아이콘 관련 API")
 @RestController
-@RequestMapping("/std")
+@RequestMapping("/teamspace")
 public class UpdateTeamIconController {
 
     private final UpdateTeamIconUseCase updateTeamIconUseCase;
@@ -56,7 +56,7 @@ public class UpdateTeamIconController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
             )
     })
-    @PatchMapping("/teamspace/{teamId}/icon")
+    @PatchMapping("/{teamId}/icon")
     public ResponseEntity<String> updateTeamIcon(
             @Parameter(description = "팀 타입 (major: 전공동아리, network: 네트워크, autonomous: 자율동아리, greaduation: 졸업작품)", example = "major", required = true)
             @RequestParam String type,
