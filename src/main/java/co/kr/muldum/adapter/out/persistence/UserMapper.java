@@ -1,5 +1,6 @@
 package co.kr.muldum.adapter.out.persistence;
 
+import co.kr.muldum.domain.constants.ErrorMessages;
 import co.kr.muldum.domain.model.Student;
 import co.kr.muldum.domain.model.Teacher;
 import co.kr.muldum.domain.model.User;
@@ -28,7 +29,7 @@ public class UserMapper {
             );
         }
 
-        throw new IllegalArgumentException("Unknown entity type: " + entity.getClass().getName());
+        throw new IllegalArgumentException(String.format(ErrorMessages.UNKNOWN_ENTITY_TYPE, entity.getClass().getName()));
     }
 
     public static UserJpaEntity toEntity(User user) {
@@ -50,6 +51,6 @@ public class UserMapper {
             );
         }
 
-        throw new IllegalArgumentException("Unknown user type: " + user.getClass().getName());
+        throw new IllegalArgumentException(String.format(ErrorMessages.UNKNOWN_USER_TYPE, user.getClass().getName()));
     }
 }

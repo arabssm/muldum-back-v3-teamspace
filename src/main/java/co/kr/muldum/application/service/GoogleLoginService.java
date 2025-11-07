@@ -6,6 +6,7 @@ import co.kr.muldum.application.port.in.response.LoginResponse;
 import co.kr.muldum.application.port.out.GoogleOAuthPort;
 import co.kr.muldum.application.port.out.JwtPort;
 import co.kr.muldum.application.port.out.LoadUserPort;
+import co.kr.muldum.domain.constants.ErrorMessages;
 import co.kr.muldum.domain.exception.UnregisteredUserException;
 import co.kr.muldum.domain.model.Student;
 import co.kr.muldum.domain.model.Teacher;
@@ -56,6 +57,6 @@ public class GoogleLoginService implements GoogleLoginUseCase {
             );
         }
 
-        throw new IllegalStateException("Unknown user type: " + user.getClass().getName());
+        throw new IllegalStateException(String.format(ErrorMessages.UNKNOWN_USER_TYPE, user.getClass().getName()));
     }
 }
