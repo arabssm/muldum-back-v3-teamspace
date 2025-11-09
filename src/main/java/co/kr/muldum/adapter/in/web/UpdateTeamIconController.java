@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "TeamSpace Icon", description = "팀스페이스 아이콘 관련 API")
 @RestController
-@RequestMapping("/teamspace")
+@RequestMapping("/std/teamspace")
 public class UpdateTeamIconController {
 
     private final UpdateTeamIconUseCase updateTeamIconUseCase;

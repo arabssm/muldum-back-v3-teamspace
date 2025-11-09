@@ -20,7 +20,7 @@ import java.util.List;
 
 @Tag(name = "SuperAdmin", description = "슈퍼 관리자 API")
 @RestController
-@RequestMapping("/teamspace")
+@RequestMapping("/sup/teamspace")
 public class SuperAdminController {
 
     private final GetTeamSpaceLogsUseCase getTeamSpaceLogsUseCase;

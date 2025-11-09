@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Teacher Team", description = "교사용 팀 관리 API")
 @RestController
-@RequestMapping("/teamspace")
+@RequestMapping("/tch/teamspace")
 public class TeamInviteController {
 
     private final InviteTeamUseCase inviteTeamUseCase;
@@ -68,7 +68,7 @@ public class TeamInviteController {
                     )
             )
     })
-    @PostMapping("/team/invite")
+    @PostMapping("/invite")
     public ResponseEntity<MessageResponse> inviteTeam(@Valid @RequestBody TeamInviteRequest request) {
         inviteTeamUseCase.inviteTeam(request.getGoogleSheetUrl(), request.getTeamType());
         return ResponseEntity.status(HttpStatus.CREATED)

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "TeamPage", description = "팀 페이지 관련 API")
 @RestController
-@RequestMapping("/teamspace")
+@RequestMapping("/ara/teamspace")
 public class TeamPageController {
 
     private final GetTeamPageUseCase getTeamPageUseCase;

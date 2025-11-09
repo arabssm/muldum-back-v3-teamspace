@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "TeamSpace Banner", description = "팀스페이스 배너 관련 API")
 @RestController
-@RequestMapping("/teamspace")
+@RequestMapping("/std/teamspace")
 public class UpdateBannerController {
 
     private final UpdateBannerUseCase updateBannerUseCase;
