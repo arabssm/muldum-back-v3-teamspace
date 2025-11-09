@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
@@ -19,11 +20,11 @@ public class TeamSpaceListResponse {
     @Getter
     @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
     public static class TeamInfo {
-        private final Long teamId;
+        private final UUID teamId;
         private final String teamName;
         private final List<MemberInfo> members;
 
-        public static TeamInfo of(Long teamId, String teamName, List<MemberInfo> members) {
+        public static TeamInfo of(UUID teamId, String teamName, List<MemberInfo> members) {
             return new TeamInfo(teamId, teamName, members);
         }
     }

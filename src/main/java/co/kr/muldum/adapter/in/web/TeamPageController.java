@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @Tag(name = "TeamPage", description = "팀 페이지 관련 API")
 @RestController
 @RequestMapping("/ara/teamspace")
@@ -141,7 +143,7 @@ public class TeamPageController {
     @GetMapping("/{team-id}")
     public ResponseEntity<TeamPageResponse> getTeamPage(
             @Parameter(description = "팀 ID", example = "1", required = true)
-            @PathVariable("team-id") Long teamId) {
+            @PathVariable("team-id") UUID teamId) {
 
         TeamPageDetailResponse response = getTeamPageUseCase.getTeamPage(teamId);
 

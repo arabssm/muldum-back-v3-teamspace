@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @Tag(name = "TeamSpace Icon", description = "팀스페이스 아이콘 관련 API")
 @RestController
 @RequestMapping("/std/teamspace")
@@ -61,7 +63,7 @@ public class UpdateTeamIconController {
             @Parameter(description = "팀 타입 (major: 전공동아리, network: 네트워크, autonomous: 자율동아리, greaduation: 졸업작품)", example = "major", required = true)
             @RequestParam String type,
             @Parameter(description = "팀 ID", example = "1", required = true)
-            @PathVariable Long teamId,
+            @PathVariable UUID teamId,
             @Valid @RequestBody UpdateTeamIconRequest request) {
 
         updateTeamIconUseCase.updateTeamIcon(teamId, type, request.getUrl());
