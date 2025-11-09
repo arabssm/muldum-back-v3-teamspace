@@ -6,6 +6,7 @@ import co.kr.muldum.domain.model.TeamType;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface TeamManagementPort {
 
@@ -13,7 +14,7 @@ public interface TeamManagementPort {
 
     Team saveTeam(Team team);
 
-    void replaceMembers(Long teamId, List<Member> members);
+    void replaceMembers(UUID teamId, List<Member> members);
 
-    void updateTeamIcon(Long teamId, TeamType expectedType, String iconUrl);
+    void updateTeamIcon(UUID teamId, TeamType expectedType, String iconUrl);
 }

@@ -1,5 +1,7 @@
 package co.kr.muldum.application.port.in;
 
+import java.util.UUID;
+
 public interface UpdateBannerUseCase {
-    void updateBanner(Long teamId, String type, String url);
+    void updateBanner(UUID teamId, String type, String url);
 }
