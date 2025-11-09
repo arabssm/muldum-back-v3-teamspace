@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 public class UpdateTeamIconService implements UpdateTeamIconUseCase {
@@ -22,10 +24,10 @@ public class UpdateTeamIconService implements UpdateTeamIconUseCase {
     }
 
     @Override
-    public void updateTeamIcon(Long teamId, String teamType, String iconUrl) {
+    public void updateTeamIcon(UUID teamId, String teamType, String iconUrl) {
         log.info("Updating team icon: teamId={}, teamType={}", teamId, teamType);
 
-        if (teamId == null || teamId <= 0) {
+        if (teamId == null) {
             log.error("Invalid team ID: {}", teamId);
             throw new InvalidParameterException("팀 ID", String.valueOf(teamId));
         }

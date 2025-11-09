@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 public class UpdateTeamPageService implements UpdateTeamPageUseCase {
@@ -15,10 +17,10 @@ public class UpdateTeamPageService implements UpdateTeamPageUseCase {
     private static final Logger log = LoggerFactory.getLogger(UpdateTeamPageService.class);
 
     @Override
-    public void updateTeamPage(Long teamId, String teamType, String content) {
+    public void updateTeamPage(UUID teamId, String teamType, String content) {
         log.info("Updating team page for teamId: {}, teamType: {}", teamId, teamType);
 
-        if (teamId == null || teamId <= 0) {
+        if (teamId == null) {
             log.error("Invalid team ID: {}", teamId);
             throw new InvalidParameterException("팀 ID", String.valueOf(teamId));
         }

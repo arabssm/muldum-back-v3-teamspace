@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 @Transactional
@@ -42,7 +43,7 @@ public class TeamManagementPersistenceAdapter implements TeamManagementPort {
     }
 
     @Override
-    public void replaceMembers(Long teamId, List<Member> members) {
+    public void replaceMembers(UUID teamId, List<Member> members) {
         TeamJpaEntity team = teamJpaRepository.findById(teamId)
                 .orElseThrow(() -> new TeamNotFoundException(teamId));
 
@@ -61,7 +62,7 @@ public class TeamManagementPersistenceAdapter implements TeamManagementPort {
     }
 
     @Override
-    public void updateTeamIcon(Long teamId, TeamType expectedType, String iconUrl) {
+    public void updateTeamIcon(UUID teamId, TeamType expectedType, String iconUrl) {
         TeamJpaEntity team = teamJpaRepository.findById(teamId)
                 .orElseThrow(() -> new TeamNotFoundException(teamId));
 

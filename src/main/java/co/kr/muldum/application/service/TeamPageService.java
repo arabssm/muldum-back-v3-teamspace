@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 @Transactional(readOnly = true)
 public class TeamPageService implements GetTeamPageUseCase {
@@ -16,10 +18,10 @@ public class TeamPageService implements GetTeamPageUseCase {
     private static final Logger log = LoggerFactory.getLogger(TeamPageService.class);
 
     @Override
-    public TeamPageDetailResponse getTeamPage(Long teamId) {
+    public TeamPageDetailResponse getTeamPage(UUID teamId) {
         log.info("Fetching team page for teamId: {}", teamId);
 
-        if (teamId == null || teamId <= 0) {
+        if (teamId == null) {
             log.error("Invalid team ID: {}", teamId);
             throw new InvalidParameterException("팀 ID", String.valueOf(teamId));
         }
