@@ -12,6 +12,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Component
@@ -31,7 +32,7 @@ public class TeamQueryConsumer {
 
             TeamQueryResponse response;
             if (memberOpt.isPresent()) {
-                Long teamId = memberOpt.get().getTeam().getTeamId();
+                UUID teamId = memberOpt.get().getTeam().getTeamId();
                 response = TeamQueryResponse.success(request.getUserId(), teamId, request.getCorrelationId());
                 log.info("Found teamId: {} for userId: {}", teamId, request.getUserId());
             } else {
