@@ -5,12 +5,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
+import java.util.UUID;
+
 @Entity
 @DiscriminatorValue("STUDENT")
 public class StudentJpaEntity extends UserJpaEntity {
 
-    @Column(name = "team_id")
-    private Long teamId;
+    @Column(name = "team_id", columnDefinition = "uuid")
+    private UUID teamId;
 
     @Column(name = "grade")
     private int grade;
@@ -24,7 +26,7 @@ public class StudentJpaEntity extends UserJpaEntity {
     protected StudentJpaEntity() {
     }
 
-    public StudentJpaEntity(Long userId, String email, String name, Long teamId, int grade, int classNo, int studentNo) {
+    public StudentJpaEntity(Long userId, String email, String name, UUID teamId, int grade, int classNo, int studentNo) {
         super(userId, email, name, Role.STUDENT);
         this.teamId = teamId;
         this.grade = grade;
@@ -32,7 +34,7 @@ public class StudentJpaEntity extends UserJpaEntity {
         this.studentNo = studentNo;
     }
 
-    public Long getTeamId() {
+    public UUID getTeamId() {
         return teamId;
     }
 

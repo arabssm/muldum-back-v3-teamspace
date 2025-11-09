@@ -2,16 +2,18 @@ package co.kr.muldum.domain.model;
 
 import lombok.Getter;
 
+import java.util.UUID;
+
 @Getter
 public class Team {
 
-    private final Long teamId;
+    private final UUID teamId;
     private final String name;
     private final TeamType teamType;
     private final String readme;
     private final String iconUrl;
 
-    private Team(Long teamId, String name, TeamType teamType, String readme, String iconUrl) {
+    private Team(UUID teamId, String name, TeamType teamType, String readme, String iconUrl) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Team name cannot be null or empty");
         }
@@ -26,7 +28,7 @@ public class Team {
         return new Team(null, name, teamType, null, null);
     }
 
-    public static Team of(Long teamId, String name, TeamType teamType, String readme, String iconUrl) {
+    public static Team of(UUID teamId, String name, TeamType teamType, String readme, String iconUrl) {
         return new Team(teamId, name, teamType, readme, iconUrl);
     }
 
@@ -38,7 +40,7 @@ public class Team {
         return new Team(this.teamId, this.name, this.teamType, this.readme, iconUrl);
     }
 
-    public Team withId(Long teamId) {
+    public Team withId(UUID teamId) {
         return new Team(teamId, this.name, this.teamType, this.readme, this.iconUrl);
     }
 }
