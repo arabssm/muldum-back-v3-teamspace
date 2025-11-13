@@ -142,7 +142,7 @@ public class UpdateTeamPageController {
             @RequestParam String type,
             @Valid @RequestBody UpdateTeamPageRequest request) {
 
-        updateTeamPageUseCase.updateTeamPage(request.getTeam_id(), type, request.getContent());
+        updateTeamPageUseCase.updateTeamPage(request.getTeamId(), type, request.getContent());
 
         return ResponseEntity.ok(MessageResponse.of("팀 페이지가 성공적으로 수정되었습니다."));
     }
